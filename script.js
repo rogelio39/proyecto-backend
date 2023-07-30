@@ -34,7 +34,6 @@ class ProductsManager {
     }
 }
 
-
 class Products {
     constructor(title, description, price, code, stock, thumbnail) {
         this.title = title,
@@ -68,15 +67,18 @@ class Products {
 
 
 }
-
+//se crean productos
 const product1 = new Products('Pan Integral', 'Pan con harina integral y mix de semillas', 500, 'ALV100', 10, []);
 const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 600, 'ALV102', 10, []);
 const product3 = new Products('Pan de Campo', 'Pan de campo con hierbas', 700, 'ALV103', 10, []);
 const product4 = new Products('Pan de masa madre', 'Pan de masa madre tipo hogaza', 800, 'ALV104', 10, []);
 const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de chia', 900, 'ALV105', 10, []);
 
-const productManager = new ProductsManager();
 
+
+//se crea instancia de la clase manejadora de productos
+const productManager = new ProductsManager();
+//se agregan productos
 productManager.addProduct(product1, generadorId());
 productManager.addProduct(product2, generadorId());
 productManager.addProduct(product3, generadorId());
@@ -90,9 +92,4 @@ if (foundProduct) {
 
 
 console.log(productManager.getProducts());
-
-console.log(product1);
-console.log(product2);
-console.log(product3);
-
 
