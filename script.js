@@ -2,26 +2,16 @@
 class ProductsManager {
     constructor() {
         this.products = [];
-        this.usedIds = new Set();
     }
 
 
-    addProduct(product, funct) {
-
-        if (!product.id) {
-            product.id = generadorId(); // Generamos un ID aleatorio si el producto no tiene uno
-        }
-
-        if (!this.usedIds.has(product.id)) {
-            // Verificamos si el ID aún no ha sido utilizado
-            this.products.push(product.id, product);
-            this.usedIds.add(product.id); // Agregamos el ID al conjunto de IDs utilizados
+    addProduct(product) {
+        const prod = products.find(prod => prod.code === product.code);
+        if (!prod) {
+            this.products.push(product);
         } else {
-            console.log('El ID del producto ya está en uso. Generando un nuevo ID...');
-            product.id = generadorId(); // Generamos un nuevo ID aleatorio
-            this.addProduct(product); // Intentamos agregar el producto de nuevo con el nuevo ID de forma recursiva
+            console.log('El CODE del producto ya está en uso.');
         }
-
     }
 
     getProducts() {
@@ -44,14 +34,6 @@ class ProductsManager {
     }
 }
 
-function generadorId() {
-
-    const minId = 1;
-    const maxId = 10000;
-    const idGenerado = Math.floor(Math.random() * (maxId - minId + 1)) + minId;
-    return idGenerado;
-
-}
 
 class Products {
     constructor(title, description, price, code, stock, thumbnail) {
@@ -59,10 +41,10 @@ class Products {
             this.description = description,
             this.price = price,
             this.code = code,
-            this.stock = stock,
+            this.stock = stock, 
             this.thumbnail = thumbnail
-    }
-
+            this.id = Products.incrementarId();
+    }   
     getProductDetails() {
         return {
             title: this.title,
@@ -70,12 +52,22 @@ class Products {
             price: this.price,
             code: this.code,
             stock: this.stock,
-            thumbnail: this.thumbnail
+            thumbnail: this.thumbnail,
+            id: this.id
         };
     }
 
+    static incrementarId() {
+        if(this.idIncrement){
+            this.idIncrement++;
+        } else {
+            this.idIncrement = 1;
+        }
+        return this.idIncrement;
 }
 
+
+}
 
 const product1 = new Products('Pan Integral', 'Pan con harina integral y mix de semillas', 500, 'ALV100', 10, []);
 const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 600, 'ALV102', 10, []);
@@ -91,23 +83,16 @@ productManager.addProduct(product3, generadorId());
 productManager.addProduct(product4, generadorId());
 productManager.addProduct(product5, generadorId());
 
-// const foundProduct = productManager.getProductById(product1);
-// if (foundProduct) {
-//     console.log(foundProduct.getProductDetails());
-// }
+const foundProduct = productManager.getProductById(product1);
+if (foundProduct) {
+    console.log(foundProduct.getProductDetails());
+}
 
 
 console.log(productManager.getProducts());
 
 console.log(product1);
-
-
-
-
-
-
-
-
-
+console.log(product2);
+console.log(product3);
 
 
