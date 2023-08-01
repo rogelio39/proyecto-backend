@@ -6,7 +6,7 @@ class ProductsManager {
 
 
     addProduct(product) {
-        const prod = products.find(prod => prod.code === product.code);
+        const prod = this.products.find(prod => prod.code === product.code);
         if (!prod) {
             this.products.push(product);
         } else {
@@ -19,9 +19,9 @@ class ProductsManager {
     }
 
 
-    getProductById(product) {
+    getProductById(productCode) {
 
-        const productCode = this.products.find((prod) => prod.code === product.code);
+        const product = this.products.find((prod) => prod.code === productCode.code);
         if (product) {
             console.log('producto encontrado')
             return productCode;
@@ -79,11 +79,11 @@ const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de 
 //se crea instancia de la clase manejadora de productos
 const productManager = new ProductsManager();
 //se agregan productos
-productManager.addProduct(product1, generadorId());
-productManager.addProduct(product2, generadorId());
-productManager.addProduct(product3, generadorId());
-productManager.addProduct(product4, generadorId());
-productManager.addProduct(product5, generadorId());
+productManager.addProduct(product1);
+productManager.addProduct(product2);
+productManager.addProduct(product3);
+productManager.addProduct(product4);
+productManager.addProduct(product5);
 
 const foundProduct = productManager.getProductById(product1);
 if (foundProduct) {
