@@ -4,6 +4,24 @@ class ProductsManager {
     constructor() {
         this.products = [];
         this.usedIds = new Set();
+        this.loadProducts();
+    }
+  
+  
+    loadProducts() {
+        try {
+            const data = fs.readFileSync('./productos.json', 'utf8');
+            this.products = JSON.parse(data);
+            this.products.forEach(producto => this.usedIds.add(producto.id));
+        } catch (error) {
+            this.products = [];
+            this.usedIds = new Set();
+        }
+    }
+
+    saveProducts() {
+        const jsonData = JSON.stringify(this.products, null, 2);
+        fs.writeFileSync('./productos.json', jsonData, 'utf8');
     }
 
 
@@ -15,7 +33,7 @@ class ProductsManager {
             // Verificamos si el ID aún no ha sido utilizado
             this.products.push(product);
             this.usedIds.add(product.id); // Agregamos el ID al conjunto de IDs utilizados
-            fs.appendFileSync('./productos.txt', `\n${product.id}`); 
+           this.saveProducts(); 
         } else {
             console.error('Error al cargar el producto, intente nuevamente')
         }
@@ -101,9 +119,3 @@ productManager.addProduct(product2);
 productManager.addProduct(product3);
 productManager.addProduct(product4);
 productManager.addProduct(product5);
-
-
-
-
-
-// console.log(productManager.getProducts());
