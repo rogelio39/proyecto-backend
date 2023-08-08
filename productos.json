@@ -6,7 +6,7 @@
     "code": "ALV100",
     "stock": 10,
     "thumbnail": [],
-    "id": 37
+    "id": 6084
   },
   {
     "title": "Pan Blanco",
@@ -15,7 +15,7 @@
     "code": "ALV102",
     "stock": 10,
     "thumbnail": [],
-    "id": 3402
+    "id": 4646
   },
   {
     "title": "Pan de Campo",
@@ -24,7 +24,7 @@
     "code": "ALV103",
     "stock": 10,
     "thumbnail": [],
-    "id": 6229
+    "id": 2361
   },
   {
     "title": "Pan de masa madre",
@@ -33,7 +33,7 @@
     "code": "ALV104",
     "stock": 10,
     "thumbnail": [],
-    "id": 5674
+    "id": 2732
   },
   {
     "title": "Pan de centeno",
@@ -42,6 +42,6 @@
     "code": "ALV105",
     "stock": 10,
     "thumbnail": [],
-    "id": 4396
+    "id": 431
   }
 ]
