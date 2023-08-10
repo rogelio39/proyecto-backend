@@ -6,42 +6,42 @@
     "code": "ALV100",
     "stock": 10,
     "thumbnail": [],
-    "id": 6084
+    "id": 7591
   },
   {
     "title": "Pan Blanco",
     "description": "Pan blanco con mix de semillas",
     "price": 600,
-    "code": "ALV102",
+    "code": "ALV101",
     "stock": 10,
     "thumbnail": [],
-    "id": 4646
+    "id": 8115
   },
   {
     "title": "Pan de Campo",
     "description": "Pan de campo con hierbas",
     "price": 700,
-    "code": "ALV103",
+    "code": "ALV102",
     "stock": 10,
     "thumbnail": [],
-    "id": 2361
+    "id": 8416
   },
   {
     "title": "Pan de masa madre",
     "description": "Pan de masa madre tipo hogaza",
     "price": 800,
-    "code": "ALV104",
+    "code": "ALV103",
     "stock": 10,
     "thumbnail": [],
-    "id": 2732
+    "id": 5485
   },
   {
     "title": "Pan de centeno",
     "description": "Pan de centeno con semillas de chia",
     "price": 900,
-    "code": "ALV105",
+    "code": "ALV104",
     "stock": 10,
     "thumbnail": [],
-    "id": 431
+    "id": 6001
   }
 ]
