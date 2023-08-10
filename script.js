@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 class ProductsManager {
     constructor() {
         this.products = [];
-        this.usedIds();
+        this.usedIds = new Set();
         this.loadProducts();
     }
 
@@ -33,6 +33,7 @@ class ProductsManager {
         try {
             const data = JSON.parse(await fs.readFile('./productos.json', 'utf8'));
             this.products = data;
+            this.products.forEach(producto => this.usedIds.add(producto.id));
         } catch (error) {
             this.products = [];
             this.usedIds = new Set();
