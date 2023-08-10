@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 class ProductsManager {
     constructor() {
         this.products = [];
+        this.usedIds();
         this.loadProducts();
     }
 
@@ -12,8 +13,9 @@ class ProductsManager {
             const prod = prodJson.find((prods) => prods.code === product.code);
             if (prod) {
                 console.log('producto existente');
-            } else {
+            } else if(!this.usedIds.has(product.id)) {
                 this.products.push(product);
+                this.usedIds.add(product.id);
                 this.saveProducts();
             }
         } catch (error) {
@@ -39,9 +41,9 @@ class ProductsManager {
     }
 
 
-    saveProducts() {
+    async saveProducts() {
         const jsonData = JSON.stringify(this.products, null, 2);
-        fs.writeFile('./productos.json', jsonData, 'utf8');
+        await fs.writeFile('./productos.json', jsonData, 'utf8');
     }
 
     async getProducts() {
@@ -145,7 +147,7 @@ const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 60
 const product3 = new Products('Pan de Campo', 'Pan de campo con hierbas', 700, 'ALV102', 10, []);
 const product4 = new Products('Pan de masa madre', 'Pan de masa madre tipo hogaza', 800, 'ALV103', 10, []);
 const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de chia', 900, 'ALV104', 10, []);
-// const product52 = new Products('Pan de centeno', 'Pan de centeno con semillas de chia', 900, 'ALV105', 10, []);
+const product52 = new Products('Pan de centeno', 'Pan de centeno con semillas de chia', 900, 'ALV104', 10, []);
 
 
 productManager.addProduct(product1);
@@ -153,7 +155,7 @@ productManager.addProduct(product2);
 productManager.addProduct(product3);
 productManager.addProduct(product4);
 productManager.addProduct(product5);
-// productManager.addProduct(product52);
+productManager.addProduct(product52);
 
 // console.log(productManager.deleteProduct(product3));
 // console.log(productManager.getProductById(product1.id));

@@ -6,7 +6,7 @@
     "code": "ALV100",
     "stock": 10,
     "thumbnail": [],
-    "id": 7591
+    "id": 5062
   },
   {
     "title": "Pan Blanco",
@@ -15,7 +15,7 @@
     "code": "ALV101",
     "stock": 10,
     "thumbnail": [],
-    "id": 8115
+    "id": 598
   },
   {
     "title": "Pan de Campo",
@@ -24,7 +24,7 @@
     "code": "ALV102",
     "stock": 10,
     "thumbnail": [],
-    "id": 8416
+    "id": 9596
   },
   {
     "title": "Pan de masa madre",
@@ -33,7 +33,7 @@
     "code": "ALV103",
     "stock": 10,
     "thumbnail": [],
-    "id": 5485
+    "id": 398
   },
   {
     "title": "Pan de centeno",
@@ -42,6 +42,15 @@
     "code": "ALV104",
     "stock": 10,
     "thumbnail": [],
-    "id": 6001
+    "id": 1428
+  },
+  {
+    "title": "Pan de centeno",
+    "description": "Pan de centeno con semillas de chia",
+    "price": 900,
+    "code": "ALV104",
+    "stock": 10,
+    "thumbnail": [],
+    "id": 8662
   }
 ]
