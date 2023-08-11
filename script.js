@@ -3,19 +3,19 @@ class ProductsManager {
     constructor() {
         this.products = [];
         this.usedIds = new Set();
-        this.filePath = './productos.json';
+        this.filePath = './productos.txt';
         this.writeProducts();
         this.readProducts();
     }
 
     async writeProducts() {
-        const jsonData = JSON.stringify(this.products, null, 2);
-        await fs.writeFile(this.filePath, jsonData, 'utf8');
+        const datos = JSON.stringify(this.products);
+        await fs.writeFile(this.filePath, `\n${datos}`, 'utf8');
     }
 
     async readProducts() {
         try {
-            let data = JSON.parse(await fs.readFile(this.filePath, 'utf8'));
+            const data = JSON.parse(await fs.readFile(this.filePath, 'utf-8'));
             this.products = data;
             this.products.forEach(producto => this.usedIds.add(producto.id));
         } catch (error) {
@@ -29,14 +29,14 @@ class ProductsManager {
     async addProduct(product) {
         try {
             //verificar si existe el producto
-            const existingProduct = this.products.find(prod => prod.code === product.code);
+            const existingProduct = this.products.find(prod => prod.id === product.id);
             if (existingProduct) {
                 throw new Error('el producto ya existe');
             } else {
                 this.products.push(product);
                 this.usedIds.add(product.id)
-                await this.writeProducts(this.products);
                 console.log('producto agregado');
+                await this.writeProducts();
             }
         } catch (error) {
             console.error('error al agregar el producto');
@@ -141,6 +141,7 @@ productManager.addProduct(product2);
 
 
 
+productManager.getProductById(1);
 
 
 
