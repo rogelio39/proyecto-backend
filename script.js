@@ -9,7 +9,7 @@ class ProductsManager {
     }
 
     async writeProducts() {
-        const datos = JSON.stringify(this.products, null, 2);
+        const datos = JSON.stringify(this.products, null, 4);
         await fs.writeFile(this.filePath, datos, 'utf8');
     }
 
@@ -55,8 +55,8 @@ class ProductsManager {
                 const index = this.products.findIndex((prod) => prod.id === productId);
                 if (index !== -1) {
                     this.products[index] = productToUpdate;
-                    await this.writeProducts();
                 }
+                await this.writeProducts();
             }
         } catch (error) {
             console.error('error', error.message);
@@ -77,19 +77,16 @@ class ProductsManager {
     }
 
     async getProducts() {
-        const product = await this.readProducts();
-        this.products = product;
-        return products;
+        const data = await this.readFile();
+        return data;
     }
 
     async deleteProduct(id) {
         try {
-            const datosJson = await this.readProducts();
-            const products = products.find((prod) => prod.id === id);
+            const products = this.products.find((prod) => prod.id === id);
             if(products){
-                const prodsToDelete = products.filter(prod => prod.id !== id);
+                const prodsToDelete = this.products.filter(prod => prod.id !== id);
                 this.products = prodsToDelete;
-                products = prodsToDelete;
                 await this.writeProducts();
             }
         } catch (error) {
@@ -127,6 +124,7 @@ class Products {
 }
 
 const productManager = new ProductsManager();
+productManager.writeProducts();
 
 const product1 = new Products('Pan Integral', 'Pan con harina integral y mix de semillas', 500, 'ALV100', 10, []);
 const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 600, 'ALV101', 10, []);
@@ -139,8 +137,10 @@ const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de 
 productManager.addProduct(product1);
 productManager.addProduct(product2);
 
-productManager.getProductById(1);
 
+
+
+// productManager.getProductById(1);
 
 
 
