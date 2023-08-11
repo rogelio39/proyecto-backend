@@ -18,6 +18,7 @@ class ProductsManager {
             const data = JSON.parse(await fs.readFile(this.filePath, 'utf-8'));
             this.products = data;
             this.products.forEach(producto => this.usedIds.add(producto.id));
+            return this.products;
         } catch (error) {
             if (error) {
                 this.products = [];
@@ -29,7 +30,7 @@ class ProductsManager {
     async addProduct(product) {
         try {
             //verificar si existe el producto
-            const existingProduct = this.products.find(prod => prod.id === product.id);
+            const existingProduct = this.products.find(prod => prod.code === product.code);
             if (existingProduct) {
                 throw new Error('el producto ya existe');
             } else {
@@ -55,8 +56,9 @@ class ProductsManager {
                 const index = this.products.findIndex((prod) => prod.id === productId);
                 if (index !== -1) {
                     this.products[index] = productToUpdate;
+                    const productos = JSON.stringify(this.products, null, 4)
+                    await fs.writeFile(this.filePath, productos, 'utf-8');
                 }
-                await this.writeProducts();
             }
         } catch (error) {
             console.error('error', error.message);
@@ -77,8 +79,8 @@ class ProductsManager {
     }
 
     async getProducts() {
-        const data = await this.readFile();
-        return data;
+        const products = await this.readProducts();
+        console.log(products)
     }
 
     async deleteProduct(id) {
@@ -134,15 +136,13 @@ const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de 
 
 
 
+
+
 productManager.addProduct(product1);
 productManager.addProduct(product2);
+productManager.addProduct(product5);
 
 
-
-
-// productManager.getProductById(1);
-
-
-
+productManager.updatedProduct(2, 'title', 'rogelio');
 
 

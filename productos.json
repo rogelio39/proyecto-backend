@@ -9,12 +9,22 @@
         "id": 1
     },
     {
-        "title": "Pan Blanco",
+        "title": "rogelio",
         "description": "Pan blanco con mix de semillas",
         "price": 600,
         "code": "ALV101",
         "stock": 10,
         "thumbnail": [],
         "id": 2
+    },
+    {
+        "title": "Pan de centeno",
+        "description": "Pan de centeno con semillas de chia",
+        "price": 900,
+        "code": "ALV104",
+        "stock": 10,
+        "thumbnail": [],
+        "id": 5
     }
+]}
 ]
