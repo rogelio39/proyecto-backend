@@ -3,14 +3,14 @@ class ProductsManager {
     constructor() {
         this.products = [];
         this.usedIds = new Set();
-        this.filePath = './productos.txt';
+        this.filePath = './productos.json';
         this.writeProducts();
         this.readProducts();
     }
 
     async writeProducts() {
-        const datos = JSON.stringify(this.products);
-        await fs.writeFile(this.filePath, `\n${datos}`, 'utf8');
+        const datos = JSON.stringify(this.products, null, 2);
+        await fs.writeFile(this.filePath, datos, 'utf8');
     }
 
     async readProducts() {
@@ -55,8 +55,8 @@ class ProductsManager {
                 const index = this.products.findIndex((prod) => prod.id === productId);
                 if (index !== -1) {
                     this.products[index] = productToUpdate;
+                    await this.writeProducts();
                 }
-                await this.writeProducts();
             }
         } catch (error) {
             console.error('error', error.message);
@@ -79,20 +79,22 @@ class ProductsManager {
     async getProducts() {
         const product = await this.readProducts();
         this.products = product;
-        return this.products;
+        return products;
     }
 
     async deleteProduct(id) {
         try {
-            const products = this.products.find((prod) => prod.id === id);
+            const datosJson = await this.readProducts();
+            const products = products.find((prod) => prod.id === id);
             if(products){
-                const prodsToDelete = this.products.filter(prod => prod.id !== id);
+                const prodsToDelete = products.filter(prod => prod.id !== id);
                 this.products = prodsToDelete;
+                products = prodsToDelete;
+                await this.writeProducts();
             }
         } catch (error) {
             console.error('error al eliminar el producto', error.message);
         }
-        await this.writeProducts();
     }
     }
 
@@ -125,7 +127,6 @@ class Products {
 }
 
 const productManager = new ProductsManager();
-productManager.writeProducts();
 
 const product1 = new Products('Pan Integral', 'Pan con harina integral y mix de semillas', 500, 'ALV100', 10, []);
 const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 600, 'ALV101', 10, []);
@@ -137,9 +138,6 @@ const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de 
 
 productManager.addProduct(product1);
 productManager.addProduct(product2);
-
-
-
 
 productManager.getProductById(1);
 

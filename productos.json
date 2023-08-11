@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Pan Integral",
+    "description": "Pan con harina integral y mix de semillas",
+    "price": 500,
+    "code": "ALV100",
+    "stock": 10,
+    "thumbnail": [],
+    "id": 1
+  },
+  {
+    "title": "Pan Blanco",
+    "description": "Pan blanco con mix de semillas",
+    "price": 600,
+    "code": "ALV101",
+    "stock": 10,
+    "thumbnail": [],
+    "id": 2
+  }
+]
