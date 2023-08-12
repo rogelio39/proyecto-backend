@@ -142,12 +142,16 @@ setTimeout(() => {
     productManager.addProduct(product2);
     productManager.addProduct(product3);
 
-}, 1000)
+}, 100)
 
 
 setTimeout(() => {
     productManager.deleteProduct(2);
-}, 2000)
+}, 200)
+
+setTimeout(() => {
+    productManager.updatedProduct(3, 'title', 'pepe');
+}, 300)
 
 
 
