@@ -57,7 +57,9 @@ class ProductsManager {
                 if (index !== -1) {
                     this.products[index] = productToUpdate;
                     const productos = JSON.stringify(this.products, null, 4)
-                    await fs.writeFile(this.filePath, productos, 'utf-8');
+                    await this.writeProducts();
+
+
                 }
             }
         } catch (error) {
@@ -86,7 +88,7 @@ class ProductsManager {
     async deleteProduct(id) {
         try {
             const products = this.products.find((prod) => prod.id === id);
-            if(products){
+            if (products) {
                 const prodsToDelete = this.products.filter(prod => prod.id !== id);
                 this.products = prodsToDelete;
                 await this.writeProducts();
@@ -95,7 +97,7 @@ class ProductsManager {
             console.error('error al eliminar el producto', error.message);
         }
     }
-    }
+}
 
 
 class Products {
@@ -112,7 +114,7 @@ class Products {
     static usedIds = new Set();
 
     static generadorId() {
-        if(this.idIncrement && this.usedIds.has(this.idIncrement)){
+        if (this.idIncrement && this.usedIds.has(this.idIncrement)) {
             this.idIncrement++;
         } else {
             this.idIncrement = 1;
@@ -133,16 +135,20 @@ const product2 = new Products('Pan Blanco', 'Pan blanco con mix de semillas', 60
 const product3 = new Products('Pan de Campo', 'Pan de campo con hierbas', 700, 'ALV102', 10, []);
 const product4 = new Products('Pan de masa madre', 'Pan de masa madre tipo hogaza', 800, 'ALV103', 10, []);
 const product5 = new Products('Pan de centeno', 'Pan de centeno con semillas de chia', 900, 'ALV104', 10, []);
+const product6 = new Products('Pan de Campo', 'Pan de campo con hierbas', 700, 'ALV102', 10, []);
+
+setTimeout(() => {
+    productManager.addProduct(product1);
+    productManager.addProduct(product2);
+    productManager.addProduct(product3);
+
+}, 1000)
 
 
+setTimeout(() => {
+    productManager.deleteProduct(2);
+}, 2000)
 
 
-
-productManager.addProduct(product1);
-productManager.addProduct(product2);
-productManager.addProduct(product5);
-
-
-productManager.updatedProduct(2, 'title', 'rogelio');
 
 
